@@ -11,6 +11,8 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        setupEvents()
+        setValues()
     }
 
     override fun setupEvents() {
@@ -29,11 +31,13 @@ class MainActivity : BaseActivity() {
 
                     if(codeNum == 200){
 //              로그인 성공
+                        //Toast.makeText(mContext,)
                     }
                     else{
 //              로그인 실패 => 토스트로 실패했다고 출력하자.
                         runOnUiThread {
-                            Toast.makeText(mContext,"로그인 실패",Toast.LENGTH_SHORT).show()
+                            val message = json.getString("message")
+                            Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
                         }
 
                     }
