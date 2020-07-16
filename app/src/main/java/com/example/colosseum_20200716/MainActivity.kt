@@ -2,6 +2,8 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.colosseum_20200716.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,11 +12,19 @@ class MainActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
-        TODO("Not yet implemented")
+        loginBtn.setOnClickListener {
+            // 입력한 아이디와 비번을 받아서
+            val inputEmail = emailEdt.text.toString()
+            val inputPw = pwEdt.text.toString()
+
+            // 서버에 전달해주고 응답 처리
+            ServerUtil.postRequestLogin(mContext,inputEmail,inputPw, null)
+
+        }
     }
 
     override fun setValues() {
-        TODO("Not yet implemented")
+
     }
 
 
