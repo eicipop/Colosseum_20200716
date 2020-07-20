@@ -55,21 +55,50 @@ class SignUpActivity : BaseActivity() {
 //            여기 코드가 실행된다 => 모든 검사를 통과했다.
 
 //            ServerUtil.
+            ServerUtil.putRequestSignUp(mContext, inputEmail, inputPassword, inputNickName, object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
+
+                    val code = json.getInt("code")
+
+                    if (code == 200) {
+//                        회원가입 성공 => 토스트로 가입 성공메세지 + 로그인 복귀
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                            finish()
+                        }
+
+                    }
+                    else {
+//                        가입 실패 => 서버가 알려주는 실패사유를 토스트로 출력
+
+                        val message = json.getString("message")
+
+                        runOnUiThread {
+                            Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    }
+
+                }
+
+            })
 
 
         }
 
 //        비밀번호 입력 내용 변경 이벤트 처리
-        inputPassword.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+inputPassword.addTextChangedListener(object : TextWatcher {
+    override fun afterTextChanged(s: Editable?) {
 
-            }
+    }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-            }
+    }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 //                내용 변경 완료된 시점에 실행
 
 //                입력된 글자의 길이 확인.
@@ -77,27 +106,27 @@ class SignUpActivity : BaseActivity() {
 //                8글자 안되면, "비밀번호가 너무 짧습니다."
 //                그 이상이면, "사용해도 좋은 비밀번호입니다."
 
-                val tempPw = inputPassword.text.toString()
+        val tempPw = inputPassword.text.toString()
 
-                if (tempPw.isEmpty()) {
+        if (tempPw.isEmpty()) {
 //                    입력 안한 경우
-                    passwordCheckResultTxt.text = "비밀번호를 입력해 주세요."
-                } else if (tempPw.length < 8) {
+            passwordCheckResultTxt.text = "비밀번호를 입력해 주세요."
+        } else if (tempPw.length < 8) {
 //                    길이가 부족한 경우
-                    passwordCheckResultTxt.text = "비밀번호가 너무 짧습니다."
-                } else {
+            passwordCheckResultTxt.text = "비밀번호가 너무 짧습니다."
+        } else {
 //                    충분히 긴 비밀번호
-                    passwordCheckResultTxt.text = "사용해도 좋은 비밀번호 입니다."
-                }
+            passwordCheckResultTxt.text = "사용해도 좋은 비밀번호 입니다."
+        }
 
-
-            }
-
-        })
 
     }
 
-    override fun setValues() {
+})
 
-    }
+}
+
+override fun setValues() {
+
+}
 }

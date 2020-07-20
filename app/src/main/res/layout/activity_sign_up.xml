@@ -26,11 +26,10 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="패스워드를 입력해주세요(8글자 이상"/>
-    <EditText
+    <TextView
         android:id="@+id/passwordCheckResultTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPassword"
         android:hint="비밀번호 재입력"
     />
     <TextView

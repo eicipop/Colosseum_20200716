@@ -34,8 +34,12 @@ class LoginActivity : BaseActivity() {
                     val codeNum = json.getInt("code")
 
                     if(codeNum == 200){
-//              로그인 성공
+//              로그인 성공 = > 서버가 알려주는 토큰을 반영구 저장
                         //Toast.makeText(mContext,)
+                        //json => data => token 스트링 추출
+                        val data = json.getJSONObject("data")
+                        val token = data.getString("token")
+                        // 얻어낸 토큰을 저장
                     }
                     else{
 //              로그인 실패 => 토스트로 실패했다고 출력하자.
