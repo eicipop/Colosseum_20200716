@@ -2,6 +2,10 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
+import kotlinx.android.synthetic.main.activity_sign_up.*
 
 class SignUpActivity : BaseActivity() {
 
@@ -14,7 +18,23 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+//  비밀번호 입력내용 변경 이벤트 처리
+        passwordEdt.addTextChangedListener(object: TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
 
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+ //         내용 변경 완료된 시점에 실행
+
+                Log.d("비번 입력", p0.toString())
+            }
+
+        })
     }
 
     override fun setValues() {

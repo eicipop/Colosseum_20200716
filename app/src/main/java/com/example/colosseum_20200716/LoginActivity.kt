@@ -1,5 +1,6 @@
 package com.example.colosseum_20200716
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.example.colosseum_20200716.utils.ServerUtil
@@ -15,6 +16,10 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        signUpBtn.setOnClickListener {
+            val myIntent = Intent(mContext, SignUpActivity::class.java)
+            startActivity(myIntent)
+        }
         loginBtn.setOnClickListener {
             // 입력한 아이디와 비번을 받아서
             val inputEmail = emailEdt.text.toString()
