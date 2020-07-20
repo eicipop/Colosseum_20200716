@@ -3,6 +3,7 @@ package com.example.colosseum_20200716
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
+import com.example.colosseum_20200716.utils.ContextUtil
 import com.example.colosseum_20200716.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
@@ -50,9 +51,12 @@ class LoginActivity : BaseActivity() {
                     }
                     else{
 //              로그인 실패 => 토스트로 실패했다고 출력하자.
+//                        어떤 이유로 실패했는지 서버가 주는 메세지를 출력
+
+//                        서버가 알려주는 메세지를 파싱
+                        val message = json.getString("message")
                         runOnUiThread {
-                            val message = json.getString("message")
-                            Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
+                                      Toast.makeText(mContext,message,Toast.LENGTH_SHORT).show()
                         }
 
                     }
