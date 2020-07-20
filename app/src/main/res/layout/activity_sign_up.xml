@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".SignUpActivity">
     <TextView
+        android:id="@+id/emailEdt"
         android:text="이메일주소"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -20,16 +21,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <EditText
-        android:id="@+id/passwordEdt"
+        android:id="@+id/inputPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="패스워드를 입력해주세요(8글자 이상"/>
     <EditText
+        android:id="@+id/passwordCheckResultTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="비밀번호 재입력"
-        />
+    />
+    <TextView
+        android:text="닉네임"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/inputNickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:singleLine="true"
+        android:hint="사용할 닉네임 입력"/>
+    <Button
+        android:id="@+id/okBtn"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="가입하기" />
 
 </LinearLayout>

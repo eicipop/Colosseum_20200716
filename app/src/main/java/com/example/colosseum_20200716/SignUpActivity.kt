@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
+import com.example.colosseum_20200716.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
 
@@ -18,23 +21,80 @@ class SignUpActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
-//  비밀번호 입력내용 변경 이벤트 처리
-        passwordEdt.addTextChangedListener(object: TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
+
+        okBtn.setOnClickListener {
+
+//            닉네임 / 이메일은 비어있으면 안된다.
+
+            val inputEmail = emailEdt.text.toString()
+
+            if (inputEmail.isEmpty()) {
+                Toast.makeText(mContext, "이메일은 반드시 입력해야합니다.", Toast.LENGTH_SHORT).show()
+//                밑의 코드는 실행할 필요가 없다.
+//                이벤트 처리를 강제 종료.
+                return@setOnClickListener
+            }
+
+            val inputNickName = inputNickname.text.toString()
+
+            if (inputNickName.isEmpty()) {
+                Toast.makeText(mContext, "닉네임은 반드시 입력해야합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//            비번은 8글자 이내면 안됨.
+
+            val inputPassword = inputPassword.text.toString()
+
+            if (inputPassword.length < 8) {
+                Toast.makeText(mContext, "비밀번호는 최소 8글자 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+//            모든 검사를 통과하면, 서버에 가입 요청
+//            여기 코드가 실행된다 => 모든 검사를 통과했다.
+
+//            ServerUtil.
+
+
+        }
+
+//        비밀번호 입력 내용 변경 이벤트 처리
+        inputPassword.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
 
             }
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
- //         내용 변경 완료된 시점에 실행
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                내용 변경 완료된 시점에 실행
 
-                Log.d("비번 입력", p0.toString())
+//                입력된 글자의 길이 확인.
+//                비어있다면, "비밀번호를 입력해 주세요."
+//                8글자 안되면, "비밀번호가 너무 짧습니다."
+//                그 이상이면, "사용해도 좋은 비밀번호입니다."
+
+                val tempPw = inputPassword.text.toString()
+
+                if (tempPw.isEmpty()) {
+//                    입력 안한 경우
+                    passwordCheckResultTxt.text = "비밀번호를 입력해 주세요."
+                } else if (tempPw.length < 8) {
+//                    길이가 부족한 경우
+                    passwordCheckResultTxt.text = "비밀번호가 너무 짧습니다."
+                } else {
+//                    충분히 긴 비밀번호
+                    passwordCheckResultTxt.text = "사용해도 좋은 비밀번호 입니다."
+                }
+
+
             }
 
         })
+
     }
 
     override fun setValues() {
