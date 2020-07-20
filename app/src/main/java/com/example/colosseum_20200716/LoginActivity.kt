@@ -40,6 +40,8 @@ class LoginActivity : BaseActivity() {
                         val data = json.getJSONObject("data")
                         val token = data.getString("token")
                         // 얻어낸 토큰을 저장
+
+                        ContextUtil.setLoginUserToken(mContext, token)
                     }
                     else{
 //              로그인 실패 => 토스트로 실패했다고 출력하자.
