@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:hint="이메일양식으로 적어주세요"
+        android:hint="이메일 양식으로 적어주세요."
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -54,11 +54,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:text="로그인" />
+
     <Button
         android:id="@+id/signUpBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="회원가입" />
-
 </LinearLayout>

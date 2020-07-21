@@ -22,7 +22,7 @@ class ServerUtil {
         private val BASE_URL = "http://15.165.177.142"
 
         // 메인화면에서 쓸 토론주제 목록을 가져오는 기능
-        fun getRequesetMainInfo(context: Context, handler: JsonResponseHandler?){
+        fun getRequestMainInfo(context: Context, handler: JsonResponseHandler?){
 
             val client = OkHttpClient()
 

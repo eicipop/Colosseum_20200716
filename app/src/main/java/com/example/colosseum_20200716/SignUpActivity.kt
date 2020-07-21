@@ -7,7 +7,9 @@ import android.text.TextWatcher
 import android.util.Log
 import android.widget.Toast
 import com.example.colosseum_20200716.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
+import kotlinx.android.synthetic.main.activity_sign_up.emailEdt
 import org.json.JSONObject
 
 class SignUpActivity : BaseActivity() {
@@ -35,7 +37,7 @@ class SignUpActivity : BaseActivity() {
                 return@setOnClickListener
             }
 
-            val inputNickName = inputNickname.text.toString()
+            val inputNickName = nickNameEdt.text.toString()
 
             if (inputNickName.isEmpty()) {
                 Toast.makeText(mContext, "닉네임은 반드시 입력해야합니다.", Toast.LENGTH_SHORT).show()
@@ -44,7 +46,7 @@ class SignUpActivity : BaseActivity() {
 
 //            비번은 8글자 이내면 안됨.
 
-            val inputPassword = inputPassword.text.toString()
+            val inputPassword = passwordEdt.text.toString()
 
             if (inputPassword.length < 8) {
                 Toast.makeText(mContext, "비밀번호는 최소 8글자 이상이어야 합니다.", Toast.LENGTH_SHORT).show()
@@ -89,7 +91,7 @@ class SignUpActivity : BaseActivity() {
         }
 
 //        비밀번호 입력 내용 변경 이벤트 처리
-inputPassword.addTextChangedListener(object : TextWatcher {
+passwordEdt.addTextChangedListener(object : TextWatcher {
     override fun afterTextChanged(s: Editable?) {
 
     }
@@ -106,7 +108,7 @@ inputPassword.addTextChangedListener(object : TextWatcher {
 //                8글자 안되면, "비밀번호가 너무 짧습니다."
 //                그 이상이면, "사용해도 좋은 비밀번호입니다."
 
-        val tempPw = inputPassword.text.toString()
+        val tempPw = passwordEdt.text.toString()
 
         if (tempPw.isEmpty()) {
 //                    입력 안한 경우

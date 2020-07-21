@@ -24,7 +24,7 @@ class MainActivity : BaseActivity() {
         topicListView.adapter = mTopicAdapter
     }
     fun getTopicListFromServer(){
-        ServerUtil.getRequesetMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
+        ServerUtil.getRequestMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
                 val data = json.getJSONObject("data")
             //topics는  [ ] 임 => JSONArray 로 추출해야함
