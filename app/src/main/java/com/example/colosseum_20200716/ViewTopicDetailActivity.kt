@@ -38,7 +38,13 @@ class ViewTopicDetailActivity : BaseActivity() {
 //      토론 주제의 진영중 어떤 진영을 눌렀는지 가져오는 index로 활용
             val clickedSide = mTopic.sideList[clickedSideTag.toInt()]
             Log.d("투표하려는 진영 제목", clickedSide.title)
+//      실제로 해당 진영에 투표하기
+            ServerUtil.postRequestVote(mContext, clickedSide.id, object : ServerUtil.JsonResponseHandler{
+                override fun onResponse(json: JSONObject) {
 
+                }
+
+            })
         }
 //      두개의 투표하기 버튼이 눌리면 할일을 모두 voteCode에 적힌내용으로
         voteToFirstSideBtn.setOnClickListener(voteCode)
@@ -81,7 +87,7 @@ class ViewTopicDetailActivity : BaseActivity() {
                         secondSideTitleTxt.text = mTopic.sideList[1].title
 
                         firstSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
-                        secondSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
+                        secondSideVoteCountTxt.text = "${mTopic.sideList[1].voteCount}표"
                     }
                 }
 
