@@ -13,8 +13,8 @@ class ViewTopicDetailActivity : BaseActivity() {
     // 메인화면에서 넘겨준 주제 id 저장
     var mTopicId = 0 // 일단 Int 임을 암시
 
-// 서버에서 받아오는 토론 정보를 저장할 멤버변수
-    lateinit var mTopic : Topic
+    // 서버에서 받아오는 토론 정보를 저장할 멤버변수
+    lateinit var mTopic: Topic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,12 @@ class ViewTopicDetailActivity : BaseActivity() {
                     runOnUiThread {
                         topicTitleTxt.text = mTopic.title
                         Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
+//                  진영정보도 같이 표시
+                        firstSideTitleTxt.text = mTopic.sideList[0].title
+                        firstSideTitleTxt.text = mTopic.sideList[1].title
 
+                        firstSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
+                        secondSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
                     }
                 }
 
