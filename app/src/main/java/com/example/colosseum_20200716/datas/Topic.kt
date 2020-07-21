@@ -16,7 +16,7 @@ class Topic {
             //만든 객체의 내용물들을 json을 이용해서 채우자
             topic.id = json.getInt("id")
             topic.title = json.getString("title")
-            topic.imageUrl = json.getString("image_url")
+            topic.imageUrl = json.getString("img_url")
             //완성된 객체를 리턴
             return topic
         }
