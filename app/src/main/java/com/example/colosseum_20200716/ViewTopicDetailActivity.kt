@@ -2,6 +2,8 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.example.colosseum_20200716.datas.Topic
@@ -24,8 +26,25 @@ class ViewTopicDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+// 버튼이 눌리면 할 일을 변수에 담아서 저장.
+//  TedPermission에서 권한 별 할 일을 변수에 담아서 저장한 것과 같은 논리
 
+        val voteCode = View.OnClickListener{
+//      it => View형태 => 눌린 버튼을 담고 있는 변수
+
+            val clickedSideTag = it.tag.toString()
+            Log.d("눌린 버튼의 태그", clickedSideTag)
+//      눌린 버튼의 태그를 Int로 바꿔서
+//      토론 주제의 진영중 어떤 진영을 눌렀는지 가져오는 index로 활용
+            val clickedSide = mTopic.sideList[clickedSideTag.toInt()]
+            Log.d("투표하려는 진영 제목", clickedSide.title)
+
+        }
+//      두개의 투표하기 버튼이 눌리면 할일을 모두 voteCode에 적힌내용으로
+        voteToFirstSideBtn.setOnClickListener(voteCode)
+        voteToSecondSideBtn.setOnClickListener(voteCode)
     }
+
 
     override fun setValues() {
 // 메인에서 넘겨준 id값을 멤버변수에 저장
@@ -59,7 +78,7 @@ class ViewTopicDetailActivity : BaseActivity() {
                         Glide.with(mContext).load(mTopic.imageUrl).into(topicImg)
 //                  진영정보도 같이 표시
                         firstSideTitleTxt.text = mTopic.sideList[0].title
-                        firstSideTitleTxt.text = mTopic.sideList[1].title
+                        secondSideTitleTxt.text = mTopic.sideList[1].title
 
                         firstSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
                         secondSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"

@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="토론 주제가 나올 자리"
                 android:textColor="#ffffff"
-                android:textSize="20sp" />
+                android:textSize="25sp" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -44,13 +44,14 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:orientation="vertical"
-                android:layout_height="match_parent">
+                android:gravity="center"
+                android:layout_height="100dp">
 
                 <TextView
                     android:id="@+id/firstSideTitleTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="두산베어스"
+                    android:text="첫번째 진영"
                     android:textColor="#ffffff"
                     android:textSize="16sp" />
 
@@ -61,6 +62,12 @@
                     android:gravity="center"
                     android:text="득표수"
                     android:textColor="#ffffff" />
+                <Button
+                    android:id="@+id/voteToFirstSideBtn"
+                    android:tag="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="투표하기"/>
             </LinearLayout>
 
             <TextView
@@ -73,6 +80,7 @@
 
             <LinearLayout
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent">
 
@@ -80,7 +88,7 @@
                     android:id="@+id/secondSideTitleTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="두산베어스"
+                    android:text="두번째 진영"
                     android:textColor="#ffffff"
                     android:textSize="16sp" />
 
@@ -91,6 +99,12 @@
                     android:gravity="center"
                     android:text="득표수"
                     android:textColor="#ffffff" />
+                <Button
+                    android:id="@+id/voteToSecondSideBtn"
+                    android:tag="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="투표하기"/>
             </LinearLayout>
 
         </LinearLayout>
