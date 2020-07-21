@@ -16,21 +16,84 @@
             android:id="@+id/topicImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:scaleType="centerCrop" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#AA000000"
-            />
+            android:background="#AA000000" />
 
-        <TextView
-            android:id="@+id/topicTitleTxt"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textColor="#ffffff"
-            android:text="토론 주제가 나올 자리"
-            android:textSize="20sp" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/topicTitleTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="토론 주제가 나올 자리"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:orientation="vertical"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="두산베어스"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="득표수"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="VS."
+                android:textColor="#ffffff"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="두산베어스"
+                    android:textColor="#ffffff"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="득표수"
+                    android:textColor="#ffffff" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        </LinearLayout>
+
     </FrameLayout>
 </LinearLayout>
+
+
