@@ -2,19 +2,26 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.colosseum_20200716.adapters.TopicAdapter
 import com.example.colosseum_20200716.datas.Topic
 import com.example.colosseum_20200716.utils.ServerUtil
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 class MainActivity : BaseActivity() {
 
     val mTopicList = ArrayList<Topic>()
+
+    lateinit var mTopicAdapter: TopicAdapter
     override fun setupEvents() {
 
     }
 
     override fun setValues() {
         getTopicListFromServer()
+
+        mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
+        topicListView.adapter = mTopicAdapter
     }
     fun getTopicListFromServer(){
         ServerUtil.getRequesetMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
@@ -33,6 +40,11 @@ class MainActivity : BaseActivity() {
                     val topic = Topic.getTopicFromJson(topicObj)
                     // 변환된 객체를 목록에 추가
                     mTopicList.add(topic)
+                }
+                //for문으로 주제 목록을 모두 추가하고 나면
+                //리스트뷰의 내용이 바꼈다고 새로고침
+                runOnUiThread {
+                    mTopicAdapter.notifyDataSetChanged()
                 }
            }
 

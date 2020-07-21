@@ -122,7 +122,7 @@ class ServerUtil {
             val formData = FormBody.Builder()
                 .add("email",email)
                 .add("password", password)
-                .add("nickname", nickname)
+                .add("nick_name", nickname)
                 .build()
 //      요청 정보를 종합하는 변수 Request 사용
 //      Intent 를 만드는것과 비슷한 개념
