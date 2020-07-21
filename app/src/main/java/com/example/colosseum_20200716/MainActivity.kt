@@ -17,7 +17,7 @@ class MainActivity : BaseActivity() {
         getTopicListFromServer()
     }
     fun getTopicListFromServer(){
-        ServerUtil.getRequesetMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
+        ServerUtil.getRequestMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
             override fun onResponse(json: JSONObject) {
 
             }
