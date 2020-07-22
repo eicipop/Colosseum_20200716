@@ -20,15 +20,14 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
             tempRow = inf.inflate(R.layout.reply_list_item, null)
         }
         val row = tempRow!!
-        val writerNameTxt = row.findViewById<TextView>(R.id.writerTxt)
-        val opinionTxt = row.findViewById<TextView>(R.id.opinionTxt)
-        val selectedSideTxt = row.findViewById<TextView>(R.id.selectedSideTxt)
+        val writerNickNameTxt = row.findViewById<TextView>(R.id.writerNickNameTxt)
+        val contentTxt = row.findViewById<TextView>(R.id.contentTxt)
+        val selectedSideTitleTxt = row.findViewById<TextView>(R.id.selectedSideTitleTxt)
         val data = mList[position]
 
-        writerNameTxt.text = data.writer.toString()
-        opinionTxt.text = data.content
-        selectedSideTxt.text = data.selectedSide.toString()
-
+        writerNickNameTxt.text = data.writer.nickName
+        contentTxt.text = data.content
+        selectedSideTitleTxt.text = "(${data.selectedSide.title})"
         return row
     }
 }
