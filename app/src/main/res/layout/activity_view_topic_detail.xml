@@ -9,15 +9,13 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:layout_gravity="center">
+        android:layout_height="250dp">
 
         <ImageView
             android:id="@+id/topicImg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -28,90 +26,121 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/topicTitleTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="토론 주제가 나올 자리"
-                android:textColor="#ffffff"
-                android:textSize="25sp" />
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:text="토론 주제 자리"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"/>
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_height="100dp">
+                android:layout_marginTop="10dp">
 
-                <TextView
-                    android:id="@+id/firstSideTitleTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="첫번째 진영"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/firstSideVoteCountTxt"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="득표수"
-                    android:textColor="#ffffff" />
-                <Button
-                    android:id="@+id/voteToFirstSideBtn"
-                    android:tag="0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="투표하기"/>
-            </LinearLayout>
+                    android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="VS."
-                android:textColor="#ffffff"
-                android:textSize="18sp" />
+                    <TextView
+                        android:id="@+id/firstSideTitleTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="첫번째 진영"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
 
-            <LinearLayout
-                android:orientation="vertical"
-                android:gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/firstSideVoteCountTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="득표 수"
+                        android:textColor="#FFFFFF" />
 
-                <TextView
-                    android:id="@+id/secondSideTitleTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="두번째 진영"
-                    android:textColor="#ffffff"
-                    android:textSize="16sp" />
+                    <Button
+                        android:id="@+id/voteToFirstSideBtn"
+                        android:tag="0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표 하기" />
+
+                </LinearLayout>
 
                 <TextView
-                    android:id="@+id/secondSideVoteCountTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Vs."
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"/>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="득표수"
-                    android:textColor="#ffffff" />
-                <Button
-                    android:id="@+id/voteToSecondSideBtn"
-                    android:tag="1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="투표하기"/>
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/secondSideTitleTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="두번째 진영"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"/>
+
+                    <TextView
+                        android:id="@+id/secondSideVoteCountTxt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="득표 수"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/voteToSecondSideBtn"
+                        android:tag="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="투표 하기" />
+
+                </LinearLayout>
+
+
             </LinearLayout>
 
-        </LinearLayout>
 
         </LinearLayout>
+
 
     </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/replyListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Button
+            android:id="@+id/postReplyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|bottom"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="의견 등록하기" />
+
+    </FrameLayout>
+
 </LinearLayout>
-
-

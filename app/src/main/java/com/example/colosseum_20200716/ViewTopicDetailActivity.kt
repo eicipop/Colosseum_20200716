@@ -12,11 +12,12 @@ import kotlinx.android.synthetic.main.activity_view_topic_detail.*
 import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
-    // 메인화면에서 넘겨준 주제 id 저장
-    var mTopicId = 0 // 일단 Int 임을 암시
 
-    // 서버에서 받아오는 토론 정보를 저장할 멤버변수
-    lateinit var mTopic: Topic
+    //    메인화면에서 넘겨준 주제 id 저장
+    var mTopicId = 0 // 일단 Int임을 암시
+
+    //    서버에서 받아오는 토론 정보를 저장할 멤버변수
+    lateinit var mTopic : Topic
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,19 +81,18 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     }
 
-
-
     override fun setValues() {
-// 메인에서 넘겨준 id값을 멤버변수에 저장
-        // 만약 0이 저장되었다면 오류가 있는 상황으로 간주하자
+
+//        메인에서 넘겨준 id값을 멤버변수에 저장
+//        만약 0이 저장되었다면 => 오류가 있는 상황으로 간주하자
         mTopicId = intent.getIntExtra("topicId", 0)
 
         if (mTopicId == 0) {
-            Toast.makeText(mContext, "주제 상세 id에 무넺가 있습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(mContext, "주제 상세 id에 문제가 있습니다.", Toast.LENGTH_SHORT).show()
         }
-//   서버에서 토론 주제에 대한 상세 진행 상황 가져오기
-        getTopicDetailFromServer()
 
+//        서버에서 토론 주제에 대한 상세 진행 상황 가져오기
+        getTopicDetailFromServer()
     }
 
     fun getTopicDetailFromServer() {
@@ -122,7 +122,7 @@ class ViewTopicDetailActivity : BaseActivity() {
 
     }
 
-    //    화면에 mTopic 기반으로 데이터 반영해주는 기능
+//    화면에 mTopic 기반으로 데이터 반영해주는 기능
 
     fun setTopicDataToUi() {
         topicTitleTxt.text = mTopic.title
@@ -134,6 +134,31 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         firstSideVoteCountTxt.text = "${mTopic.sideList[0].voteCount}표"
         secondSideVoteCountTxt.text = "${mTopic.sideList[1].voteCount}표"
+
+//        내가 투표를 했는지 or 어느 진영에 했는지에 따라 버튼 UX 변경
+//        투표 X : 두 버튼 모두 "투표하기"
+//        첫번째 진영 투표 : 첫 버튼 "투표취소", 두번째 진영 "갈아타기"
+//        그 외 : 두번째 진영 투표한걸로 처리
+
+//        투표 한 진영이 몇번째 진영인지? 파악해야함
+
+
+        if (mTopic.getMySideIndex() == -1) {
+//            아직 투표 안한 경우
+            voteToFirstSideBtn.text = "투표하기"
+            voteToSecondSideBtn.text = "투표하기"
+        }
+        else if (mTopic.getMySideIndex() == 0) {
+//            첫 진영에 투표한 경우
+            voteToFirstSideBtn.text = "투표취소"
+            voteToSecondSideBtn.text = "갈아타기"
+        }
+        else {
+//            두번째 진영에 투표한 경우
+            voteToFirstSideBtn.text = "갈아타기"
+            voteToSecondSideBtn.text = "투표취소"
+        }
+
 
     }
 }
