@@ -43,7 +43,7 @@
 
     </LinearLayout>
     <TextView
-        android:id="@+id/replayWriteTimeTxt"
+        android:id="@+id/replyWriteTimeTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -55,6 +55,7 @@
         android:orientation="horizontal"
         android:layout_marginTop="5dp">
         <Button
+            android:id="@+id/rereplyCountBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="false"
@@ -64,11 +65,13 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"/>
         <Button
+            android:id="@+id/likeCountBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="false"
             android:text="좋아요~"/>
         <Button
+            android:id="@+id/hateCountBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:focusable="false"

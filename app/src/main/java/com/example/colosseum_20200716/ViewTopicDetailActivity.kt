@@ -12,6 +12,7 @@ import com.example.colosseum_20200716.datas.Reply
 import com.example.colosseum_20200716.datas.Topic
 import com.example.colosseum_20200716.utils.ServerUtil
 import kotlinx.android.synthetic.main.activity_view_topic_detail.*
+import kotlinx.android.synthetic.main.reply_list_item.*
 import org.json.JSONObject
 
 class ViewTopicDetailActivity : BaseActivity() {
@@ -53,6 +54,11 @@ class ViewTopicDetailActivity : BaseActivity() {
             myIntent.putExtra("topicId", mTopicId)
             startActivity(myIntent)
         }
+
+
+
+
+
 //        버튼이 눌리면 할 일을 변수에 담아서 저장.
 //        TedPermission에서 권한별 할 일을 변수에 담아서 저장한것과 같은 논리
 
