@@ -34,6 +34,11 @@ class ViewTopicDetailActivity : BaseActivity() {
         setValues()
     }
 
+    override fun onResume() {
+        super.onResume()
+        getTopicDetailFromServer()
+    }
+
     override fun setupEvents() {
 //  의견등록하기 누르면 작성 화면으로
         postReplyBtn.setOnClickListener {
@@ -45,6 +50,7 @@ class ViewTopicDetailActivity : BaseActivity() {
             val myIntent = Intent(mContext, EditReplyActivity::class.java)
             myIntent.putExtra("topicTitle", mTopic.title)
             myIntent.putExtra("selectedSideTitle", mTopic.mySide!!.title)
+            myIntent.putExtra("topicId", mTopicId)
             startActivity(myIntent)
         }
 //        버튼이 눌리면 할 일을 변수에 담아서 저장.
@@ -110,8 +116,9 @@ class ViewTopicDetailActivity : BaseActivity() {
             Toast.makeText(mContext, "주제 상세 id에 문제가 있습니다.", Toast.LENGTH_SHORT).show()
         }
 
-//        서버에서 토론 주제에 대한 상세 진행 상황 가져오기
-        getTopicDetailFromServer()
+//        onResume에서 토론 진행현황을 서버에서 받아온다.
+// 기존 서버 호출 코드 삭제
+
 //       어댑터 초기화 -> 리스트뷰와 연결
         mReplyAdapter = ReplyAdapter(mContext, R.layout.reply_list_item, mReplyList)
         replyListView.adapter = mReplyAdapter
@@ -121,7 +128,7 @@ class ViewTopicDetailActivity : BaseActivity() {
 
         ServerUtil.getRequestTopicDetail(mContext, mTopicId, object : ServerUtil.JsonResponseHandler {
             override fun onResponse(json: JSONObject) {
-
+// 의견목록을 한번 비웠다가 다시 파싱
                 val data = json.getJSONObject("data")
 
                 val topicObj = data.getJSONObject("topic")
