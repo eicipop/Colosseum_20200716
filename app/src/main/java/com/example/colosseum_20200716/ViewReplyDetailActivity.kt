@@ -2,6 +2,7 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.colosseum_20200716.adapters.ReReplyAdapter
 import com.example.colosseum_20200716.datas.Reply
 import com.example.colosseum_20200716.utils.ServerUtil
 import com.example.colosseum_20200716.utils.TimeUtil
@@ -19,6 +20,8 @@ class ViewReplyDetailActivity : BaseActivity() {
     lateinit var mReply: Reply
     //의견달린 답글들을 저장할 목록
     val mReReplyList = ArrayList<Reply>()
+
+    lateinit var mReReplyAdapter : ReReplyAdapter
     //    //mReReplyList에 서버에서 내려주는 답글들을reply형태로 가공해서 추가
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,6 +43,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 //  해당 id 값에 맞는 의견 정보를 다시 불러오자
         getReplyFromServer()
 
+        mReReplyAdapter = ReReplyAdapter(mContext, R.layout.re_reply_list_item, mReReplyList)
+        reReplyListView.adapter = mReReplyAdapter
+
     }
 
     // 서버에서 의견 정보 불러오기
@@ -51,10 +57,12 @@ class ViewReplyDetailActivity : BaseActivity() {
             object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
                     val data = json.getJSONObject("data")
-                    val replyObj = data.getJSONObject("replies")
+                    val replyObj = data.getJSONObject("reply")
 
                     // replyObj 를 Reply클래스로 변환 -> mReplay 에 저장
                     mReply = Reply.getReplyFromJson(replyObj)
+
+                   // replies JSONArray를 돌면서 => Reply로 변환해서 => mReReplyList에 추가
 
                     val replies = replyObj.getJSONArray("replies")
 
@@ -71,6 +79,9 @@ class ViewReplyDetailActivity : BaseActivity() {
                         selectedSideTitleTxt.text = "(${mReply.selectedSide.title})"
                         writtenDateTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(mReply.writtenDateTime)
                         replyContentTxt.text = mReply.content
+
+                        // 답글 목록이 모두 불러지면 새로 반영
+                        mReReplyAdapter.notifyDataSetChanged()
                     }
                 }
 
