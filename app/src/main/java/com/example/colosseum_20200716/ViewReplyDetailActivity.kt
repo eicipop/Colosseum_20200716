@@ -17,6 +17,9 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     // 이 화면에서 보여줘야할 의견의 정보를 가진 변수 -> 멤버변수
     lateinit var mReply: Reply
+    //의견달린 답글들을 저장할 목록
+    val mReReplyList = ArrayList<Reply>()
+    //    //mReReplyList에 서버에서 내려주는 답글들을reply형태로 가공해서 추가
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,7 @@ class ViewReplyDetailActivity : BaseActivity() {
     }
 
     // 서버에서 의견 정보 불러오기
+
     fun getReplyFromServer() {
         ServerUtil.getRequestReplyDetail(
             mContext,
@@ -47,9 +51,19 @@ class ViewReplyDetailActivity : BaseActivity() {
             object : ServerUtil.JsonResponseHandler {
                 override fun onResponse(json: JSONObject) {
                     val data = json.getJSONObject("data")
-                    val replyObj = data.getJSONObject("reply")
+                    val replyObj = data.getJSONObject("replies")
+
                     // replyObj 를 Reply클래스로 변환 -> mReplay 에 저장
                     mReply = Reply.getReplyFromJson(replyObj)
+
+                    val replies = replyObj.getJSONArray("replies")
+
+                    for(i in 0 until replies.length()){
+
+                        val reply = Reply.getReplyFromJson(replies.getJSONObject(i))
+
+                        mReReplyList.add(reply)
+                    }
 
                     //mReply 내부의 변수(정보)들을 화면에 반영
                     runOnUiThread {
