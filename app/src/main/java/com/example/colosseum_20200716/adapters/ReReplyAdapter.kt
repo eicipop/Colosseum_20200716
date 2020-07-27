@@ -34,6 +34,7 @@ class ReReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>
         val replyBtn = row.findViewById<Button>(R.id.replyBtn)
         val likeBtn = row.findViewById<Button>(R.id.likeBtn)
         val dislikeBtn = row.findViewById<Button>(R.id.dislikeBtn)
+
         val data = mList[position]
 
         writerNickNameTxt.text = data.writer.nickName
@@ -43,10 +44,6 @@ class ReReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>
         // 시간정보 텍스트뷰 내용 설정 -> 방금전, ?분전, ?시간 전 등등..
         replywriteTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(data.writtenDateTime)
 
-        // 날짜 출력 양식용 변수
-//        val sdf = SimpleDateFormat("yy-MM-dd a h시 m분")
-//        replywriteTimeTxt.text = sdf.format(data.writtenDateTime.time)
-        // 좋 /싫 / 답글 갯수 반영
         likeBtn.text = "좋아요 ${data.likecount}"
         dislikeBtn.text = "싫어요 ${data.dislikecount}"
         replyBtn.text = "답글 ${data.replyCount}"
