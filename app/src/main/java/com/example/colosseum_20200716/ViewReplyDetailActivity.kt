@@ -1,12 +1,20 @@
 package com.example.colosseum_20200716
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import com.example.colosseum_20200716.adapters.ReReplyAdapter
 import com.example.colosseum_20200716.datas.Reply
 import com.example.colosseum_20200716.utils.ServerUtil
 import com.example.colosseum_20200716.utils.TimeUtil
+import kotlinx.android.synthetic.main.activity_edit_reply.*
+import kotlinx.android.synthetic.main.activity_view_reply_detail.selectedSideTitleTxt
+import kotlinx.android.synthetic.main.activity_view_reply_detail.writerNickNameTxt
+import kotlinx.android.synthetic.main.reply_list_item.*
 
 import org.json.JSONObject
 
@@ -15,14 +23,14 @@ class ViewReplyDetailActivity : BaseActivity() {
     //    보려는 의견의 id는 여러 함수에서 공유할 것 같다.
 //    그래서 멤버변수로 만들고 저장한다.
     var mReplyId = 0
-
+    var mTopicId = 0
     //    이 화면에서 보여줘야할 의견의 정보를 가진 변수 => 멤버변수
-    lateinit var mReply : Reply
+    lateinit var mReply: Reply
 
     //    의견에 달린 답글들을 저장할 목록
     val mReReplyList = ArrayList<Reply>()
 
-    lateinit var mReReplyAdapter : ReReplyAdapter
+    lateinit var mReReplyAdapter: ReReplyAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +40,62 @@ class ViewReplyDetailActivity : BaseActivity() {
     }
 
     override fun setupEvents() {
+        postRereplyBtn.setOnClickListener {
+            val inputContent = replyTxt.text.toString()
+            if (inputContent.length < 5){
+                Toast.makeText(mContext, "최소 5글자 이상 입력해주세요", Toast.LENGTH_SHORT).show()
+                // 이 뒤 코드는 실행할 필요가 없다.
+                return@setOnClickListener
+            }
+            //else를 안 적어도 5글자 이상임이 확인됨
+            ServerUtil.postRequestReReply(
+                mContext,
+                mReplyId,
+                inputContent,
+                object : ServerUtil.JsonResponseHandler {
+                    override fun onResponse(json: JSONObject) {
+                        val code = json.getInt("code")
+                        if (code == 200) {
+                            //의견남기기 성공하면 의견이 등록되었다는 토스트
+                            // 작성화면 종료
+                            runOnUiThread {
+                                Toast.makeText(mContext, "의견등록에 성공했습니다.", Toast.LENGTH_SHORT).show()
+                                finish()
+                            }
+                        } else {
+                            // 서버가 알려주는 의견 등록사유를 화면에 토스트로 출력
+                            val message = json.getString("message")
+                            runOnUiThread{
+                                Toast.makeText(mContext, message,Toast.LENGTH_SHORT).show()
+                            }
+
+                        }
+                    }
+
+                })
+    }
 
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     override fun setValues() {
 
@@ -53,48 +115,52 @@ class ViewReplyDetailActivity : BaseActivity() {
 
     fun getReplyFromServer() {
 
-        ServerUtil.getRequestReplyDetail(mContext, mReplyId, object : ServerUtil.JsonResponseHandler {
-            override fun onResponse(json: JSONObject) {
+        ServerUtil.getRequestReplyDetail(
+            mContext,
+            mReplyId,
+            object : ServerUtil.JsonResponseHandler {
+                override fun onResponse(json: JSONObject) {
 
-                val data = json.getJSONObject("data")
-                val replyObj = data.getJSONObject("reply")
+                    val data = json.getJSONObject("data")
+                    val replyObj = data.getJSONObject("reply")
 
 //                replyObj 를 => Reply클래스로 변환 => mReply에 저장
 
-                mReply = Reply.getReplyFromJson(replyObj)
+                    mReply = Reply.getReplyFromJson(replyObj)
 
 //                replies JSONArray를 돌면서 => Reply로 변환해서 => mReReplyList에 추가
 
-                val replies = replyObj.getJSONArray("replies")
+                    val replies = replyObj.getJSONArray("replies")
 
-                for (i in 0 until replies.length()) {
+                    for (i in 0 until replies.length()) {
 
-                    val reply = Reply.getReplyFromJson(replies.getJSONObject(i))
+                        val reply = Reply.getReplyFromJson(replies.getJSONObject(i))
 
-                    mReReplyList.add(reply)
+                        mReReplyList.add(reply)
 
-                }
+                    }
 
 //                mReply 내부의 변수(정보) 들을 => 화면에 반영
 
-                runOnUiThread {
+                    runOnUiThread {
 
-                    writerNickNameTxt.text = mReply.writer.nickName
+                        writerNickNameTxt.text = mReply.writer.nickName
 
-                    selectedSideTitleTxt.text = "(${mReply.selectedSide.title})"
+                        selectedSideTitleTxt.text = "(${mReply.selectedSide.title})"
 
-                    writtenDateTimeTxt.text = TimeUtil.getTimeAgoFromCalendar(mReply.writtenDateTime)
+                        writtenDateTimeTxt.text =
+                            TimeUtil.getTimeAgoFromCalendar(mReply.writtenDateTime)
 
-                    replyContentTxt.text = mReply.content
+                        replyContentTxt.text = mReply.content
 
 //                    답글 목록이 모두 불러지면 새로 반영
-                    mReReplyAdapter.notifyDataSetChanged()
+                        mReReplyAdapter.notifyDataSetChanged()
+
+                    }
 
                 }
 
-            }
-
-        })
+            })
 
     }
 
