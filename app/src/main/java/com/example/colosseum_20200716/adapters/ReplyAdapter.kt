@@ -1,7 +1,9 @@
 package com.example.colosseum_20200716.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Handler
 import android.os.Looper
 import android.view.LayoutInflater
@@ -23,6 +25,7 @@ import java.text.SimpleDateFormat
 class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) : ArrayAdapter<Reply>(mContext, resId, mList){
 
     val inf = LayoutInflater.from(mContext)
+
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         var tempRow = convertView
@@ -59,14 +62,18 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
         //내 좋/실 여부 반영
         if(data.myLike) {
             likeBtn.setBackgroundResource(R.drawable.red_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.red))
         }else{
             likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            likeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
         }
         if(data.myDislike){
             //싫어요 누른상태
             dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.blue))
         }else{
             dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+            dislikeBtn.setTextColor(mContext.resources.getColor(R.color.textGray))
         }
         //답글 버튼이 눌리면 의견 상세 화면으로 진입
         replyBtn.setOnClickListener {
