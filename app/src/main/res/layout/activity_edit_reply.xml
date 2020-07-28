@@ -71,7 +71,7 @@
             android:text="의견내용입력" />
 
         <EditText
-            android:id="@+id/contentEdt"
+            android:id="@+id/contentEdtTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="해당 진영에 대한 옹호 의견을 적어주세요."

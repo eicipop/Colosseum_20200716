@@ -21,7 +21,7 @@ class EditReplyActivity : BaseActivity() {
     override fun setupEvents() {
         postBtn.setOnClickListener {
             //입력내용저장
-            val inputContent = contentEdt.text.toString()
+            val inputContent = contentEdtTxt.text.toString()
             ServerUtil.postRequestReply(
                 mContext,
                 mTopicId,
