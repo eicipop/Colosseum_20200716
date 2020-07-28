@@ -56,6 +56,18 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
         dislikeBtn.text = "싫어요 ${data.dislikecount}"
         replyBtn.text = "답글 ${data.replyCount}"
 
+        //내 좋/실 여부 반영
+        if(data.myLike) {
+            likeBtn.setBackgroundResource(R.drawable.red_border_box)
+        }else{
+            likeBtn.setBackgroundResource(R.drawable.gray_border_box)
+        }
+        if(data.myDislike){
+            //싫어요 누른상태
+            dislikeBtn.setBackgroundResource(R.drawable.blue_border_box)
+        }else{
+            dislikeBtn.setBackgroundResource(R.drawable.gray_border_box)
+        }
         //답글 버튼이 눌리면 의견 상세 화면으로 진입
         replyBtn.setOnClickListener {
 
@@ -84,12 +96,14 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
 
                     val reply = Reply.getReplyFromJson(replyObj)
 //              이미 화면에 뿌려져 있는 data 의 내용만 교체
-
-                    if(data.my_dislike == true) {
-                        data.my_dislike = false
+                       data.myLike = reply.myLike
+                       data.myDislike = reply.myDislike
+                    if(data.myDislike == true) {
+                        data.myDislike = false
                     }
                     data.dislikecount = reply.dislikecount
                     data.likecount = reply.likecount
+
 
                     //                  data의 값이 변경 => 리스트뷰를 구성하는 목록에 변경
 //                    => 어댑터.notifyDataSetChanged 실행해야함
@@ -129,12 +143,14 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
                     val reply = Reply.getReplyFromJson(replyObj)
 //              이미 화면에 뿌려져 있는 data 의 내용만 교체
 
-                    if(data.my_like == true){
-                        data.my_like = false
+                    if(data.myLike == true){
+                        data.myDislike = false
                     }
                     data.likecount = reply.likecount
                     data.dislikecount = reply.dislikecount
 
+                    data.myLike = reply.myLike
+                    data.myDislike = reply.myDislike
 
                     val uiHandler = Handler(Looper.getMainLooper())
 
