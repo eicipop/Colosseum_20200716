@@ -2,12 +2,12 @@ package com.example.colosseum_20200716
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import kotlinx.android.synthetic.main.activity_view_reply_detail.*
 import com.example.colosseum_20200716.adapters.ReReplyAdapter
 import com.example.colosseum_20200716.datas.Reply
 import com.example.colosseum_20200716.utils.ServerUtil
 import com.example.colosseum_20200716.utils.TimeUtil
-import kotlinx.android.synthetic.main.activity_view_reply_detail.*
-import kotlinx.android.synthetic.main.reply_list_item.*
+
 import org.json.JSONObject
 
 class ViewReplyDetailActivity : BaseActivity() {
