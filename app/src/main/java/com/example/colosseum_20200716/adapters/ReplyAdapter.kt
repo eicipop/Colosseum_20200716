@@ -84,6 +84,11 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
 
                     val reply = Reply.getReplyFromJson(replyObj)
 //              이미 화면에 뿌려져 있는 data 의 내용만 교체
+
+                    if(data.my_dislike == true) {
+                        data.my_dislike = false
+                    }
+                    data.dislikecount = reply.dislikecount
                     data.likecount = reply.likecount
 
   //                  data의 값이 변경 => 리스트뷰를 구성하는 목록에 변경
@@ -123,11 +128,17 @@ class ReplyAdapter(val mContext: Context, val resId:Int, val mList:List<Reply>) 
 
                     val reply = Reply.getReplyFromJson(replyObj)
 //              이미 화면에 뿌려져 있는 data 의 내용만 교체
-                    data.dislikecount = reply.dislikecount
 
-                    val ui1Handler = Handler(Looper.getMainLooper())
+                        if(data.my_like == true){
+                            data.my_like = false
+                        }
+                        data.likecount = reply.likecount
+                        data.dislikecount = reply.dislikecount
 
-                    ui1Handler.post {
+
+                    val uiHandler = Handler(Looper.getMainLooper())
+
+                    uiHandler.post {
                         notifyDataSetChanged()
 
 //                        서버가 알려주는 메세지를 토스트로 출력
