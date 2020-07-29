@@ -16,6 +16,13 @@ class MainActivity : BaseActivity() {
 
     lateinit var mTopicAdapter: TopicAdapter
     override fun setupEvents() {
+
+        // 알림버튼을 누르면 알림목록 화면으로 이동
+        noticationBtn.setOnClickListener {
+        // 이미지뷰도 setOnClickListener 설정 가능.
+            val myIntent = Intent(mContext, NotificationListActivity::class.java)
+            startActivity(myIntent)
+        }
 //  토론 주제를 누르면 상세화면으로 이동
         topicListView.setOnItemClickListener { parent, view, position, id ->
             // 눌린 위치에 맞는 주제를 가져오자
