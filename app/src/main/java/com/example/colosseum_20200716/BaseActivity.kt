@@ -1,6 +1,7 @@
 package com.example.colosseum_20200716
 
 
+import android.os.Bundle
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 
@@ -9,6 +10,18 @@ abstract class BaseActivity : AppCompatActivity() {
 
     abstract fun setupEvents()
     abstract fun setValues()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+//      BaseActivity를 상속받는 모든 액티비티는
+        // onCreate에서 커스텀 액션바 설정을 하도록 하자.
+        // 액션바가 있는지 확인하고 실행
+        supportActionBar?.let{
+//      supportActionBar가 null이 아닐때 실행 할 코드 블록 - let으로 지정
+            setCustomActionBar()
+        }
+    }
 
     //  액션바를 커스텀으로 바꿔주는 기능
     fun setCustomActionBar() {
