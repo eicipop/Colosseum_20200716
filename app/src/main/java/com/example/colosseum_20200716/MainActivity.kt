@@ -3,6 +3,7 @@ package com.example.colosseum_20200716
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.example.colosseum_20200716.adapters.TopicAdapter
 import com.example.colosseum_20200716.datas.Topic
 import com.example.colosseum_20200716.utils.ServerUtil
@@ -33,6 +34,9 @@ class MainActivity : BaseActivity() {
 
         mTopicAdapter = TopicAdapter(mContext, R.layout.topic_list_item, mTopicList)
         topicListView.adapter = mTopicAdapter
+
+//  BaseActivity가 물려주는 알림버튼을 화면에 보이도록
+        noticationBtn.visibility = View.VISIBLE
     }
     fun getTopicListFromServer(){
         ServerUtil.getRequestMainInfo(mContext, object : ServerUtil.JsonResponseHandler{
