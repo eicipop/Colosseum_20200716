@@ -12,6 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <activity android:name=".NotificationListActivity"></activity>
         <activity android:name=".ViewReplyDetailActivity" />
         <activity android:name=".EditReplyActivity" />
         <activity android:name=".ViewTopicDetailActivity" />
