@@ -10,5 +10,6 @@
     <color name="red">#FF5151</color>
     <color name="blue">#385DA3</color>
     <color name="lightGray">#EFEFEF</color>
+    <color name="anotherRed">#BA2323</color>
 
 </resources>
